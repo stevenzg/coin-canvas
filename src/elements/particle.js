@@ -1,5 +1,7 @@
-var COIN_CONST = require('../common/const.js');
-var draw = require('../common/draw');
+//var COIN_CONST = require('../common/const.js');
+//var draw = require('../common/draw');
+import * as COIN_CONST from '../common/const.js';
+import draw from '../common/draw';
 
 // 点击后的碎片效果
 class Particle {

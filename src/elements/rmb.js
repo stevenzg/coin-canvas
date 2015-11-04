@@ -1,7 +1,11 @@
 //import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from '../coin_canvas_es6/common/const.js';
-var COIN_CONST = require('../common/const.js');
-var draw = require('../common/draw');
-var score = require('../common/score');
+//var COIN_CONST = require('../common/const.js');
+//var draw = require('../common/draw');
+//var score = require('../common/score');
+import * as COIN_CONST from '../common/const.js';
+import draw from '../common/draw';
+import score from '../common/score';
+
 
 var coinImage = new Image();
 coinImage.src = './img/ele.png';

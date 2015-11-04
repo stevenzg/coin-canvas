@@ -45,33 +45,53 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	//module COIN_CONST from '../coin_canvas_es6/common/const.js';
-	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from '../coin_canvas_es6/common/const.js';
-
+	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from './common/const.js';
+	//var COIN_CONST = require('./common/const');
+	//var requestAnimFrameFunction = require('./common/timer');
+	//var draw = require('./common/draw');
+	//var score = require('./common/score');
+	//var util = require('./common/util');
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _elementsRmb = __webpack_require__(1);
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+	var _commonConstJs = __webpack_require__(6);
+
+	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
+
+	var _commonTimer = __webpack_require__(1);
+
+	var _commonTimer2 = _interopRequireDefault(_commonTimer);
+
+	var _commonDraw = __webpack_require__(2);
+
+	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+
+	var _commonScore = __webpack_require__(3);
+
+	var _commonScore2 = _interopRequireDefault(_commonScore);
+
+	var _commonUtil = __webpack_require__(4);
+
+	var _commonUtil2 = _interopRequireDefault(_commonUtil);
+
+	var _elementsRmb = __webpack_require__(5);
 
 	var _elementsRmb2 = _interopRequireDefault(_elementsRmb);
 
-	var _elementsCloud = __webpack_require__(5);
+	var _elementsCloud = __webpack_require__(7);
 
 	var _elementsCloud2 = _interopRequireDefault(_elementsCloud);
 
-	var _elementsParticle = __webpack_require__(6);
+	var _elementsParticle = __webpack_require__(8);
 
 	var _elementsParticle2 = _interopRequireDefault(_elementsParticle);
 
-	var _elementsTouch = __webpack_require__(7);
+	var _elementsTouch = __webpack_require__(9);
 
 	var _elementsTouch2 = _interopRequireDefault(_elementsTouch);
-
-	var COIN_CONST = __webpack_require__(2);
-	var requestAnimFrameFunction = __webpack_require__(8);
-	var draw = __webpack_require__(3);
-	var score = __webpack_require__(4);
-	var util = __webpack_require__(9);
 
 	var grassImage = new Image();
 	grassImage.src = './img/grass.png';
@@ -159,7 +179,7 @@
 	    }
 
 	    if (Coin.Event.tabbed) {
-	      score.taps += 1;
+	      _commonScore2['default'].taps += 1;
 	      Coin.elements.push(new _elementsTouch2['default'](Coin.Event.x, Coin.Event.y));
 	      Coin.Event.tabbed = false;
 	      isCollision = true;
@@ -169,13 +189,13 @@
 	      Coin.elements[i].updateElement();
 
 	      if (Coin.elements[i].type === 'rmb' && isCollision) {
-	        var hit = util.collide(Coin.elements[i], { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
+	        var hit = _commonUtil2['default'].collide(Coin.elements[i], { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
 	        // 当击中后，显示一些碎片
 	        if (hit) {
 	          for (var n = 0; n < 5; ++n) {
 	            Coin.elements.push(new _elementsParticle2['default'](Coin.elements[i].x, Coin.elements[i].y));
 	          }
-	          score.hit += 1;
+	          _commonScore2['default'].hit += 1;
 	        }
 	        Coin.elements[i].remove = hit;
 	      }
@@ -188,19 +208,19 @@
 
 	  render: function render() {
 	    // 整个canvas的颜色
-	    draw(canvasContext).rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
+	    (0, _commonDraw2['default'])(canvasContext).rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
 	    // 草地
-	    draw(canvasContext).image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
+	    (0, _commonDraw2['default'])(canvasContext).image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
 
 	    for (var i = 0, len = Coin.elements.length; i < len; ++i) {
 	      Coin.elements[i].render();
 	    }
-	    draw(canvasContext).text('饿币: ' + score.hit / 10 + ' 元', 20, 30, 14, '#fff');
-	    draw(canvasContext).text('丢失: ' + score.escaped / 10 + ' 元', 20, 50, 14, '#fff');
+	    (0, _commonDraw2['default'])(canvasContext).text('饿币: ' + _commonScore2['default'].hit / 10 + ' 元', 20, 30, 14, '#fff');
+	    (0, _commonDraw2['default'])(canvasContext).text('丢失: ' + _commonScore2['default'].escaped / 10 + ' 元', 20, 50, 14, '#fff');
 	  },
 
 	  falling: function falling() {
-	    requestAnimFrameFunction(Coin.falling);
+	    (0, _commonTimer2['default'])(Coin.falling);
 	    Coin.repaintCanvas();
 	    Coin.render();
 	  }
@@ -225,101 +245,32 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from '../coin_canvas_es6/common/const.js';
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	var COIN_CONST = __webpack_require__(2);
-	var draw = __webpack_require__(3);
-	var score = __webpack_require__(4);
-
-	var coinImage = new Image();
-	coinImage.src = './img/ele.png';
-
-	// 生成金币
-
-	var RMB = (function () {
-	  function RMB() {
-	    _classCallCheck(this, RMB);
-
-	    this.type = 'rmb';
-	    // 半径大小
-	    this.radius = Math.random() * 20 + 10;
-	    // 下降的速度
-	    this.speed = Math.random() * 3 + 1;
-	    // 水平方向的位置
-	    this.x = Math.random() * COIN_CONST.CANVAS_DEFAULT_WIDTH - this.radius * 2;
-	    if (this.x < this.radius) {
-	      this.x = this.radius;
-	    }
-	    this.y = 0;
-	    this.remove = false;
-	  }
-
-	  _createClass(RMB, [{
-	    key: 'updateElement',
-	    value: function updateElement() {
-	      this.y += this.speed;
-	      if (this.y > COIN_CONST.CANVAS_DEFAULT_HEIGHT + 10) {
-	        score.escaped += 1;
-	        this.remove = true;
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      draw(canvasContext).image(coinImage, this.x, this.y, this.radius * 2, this.radius * 2);
-	    }
-	  }]);
-
-	  return RMB;
+	var requestAnimFrame = (function () {
+	  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+	    window.setTimeout(callback, 1000 / 60);
+	  };
 	})();
 
-	exports['default'] = RMB;
-	module.exports = exports['default'];
+	//module.exports = requestAnimFrame;
+	exports["default"] = requestAnimFrame;
+	module.exports = exports["default"];
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
-	// canvas的实际宽度和高度
-	//export const CANVAS_DEFAULT_WIDTH = 320;
-	//export const CANVAS_DEFAULT_HEIGHT = 480;
-
-	//export function a() {
-	//
-	//}
-
-	//const CANVAS_DEFAULT_WIDTH = 320;
-	//const CANVAS_DEFAULT_HEIGHT = 480;
-	//
-	//module.exports = CANVAS_DEFAULT_WIDTH;
-	//module.exports = CANVAS_DEFAULT_HEIGHT;
-
-	// canvas的实际宽度和高度
-	"use strict";
-
-	var CANVAS_CONST = {
-	  CANVAS_DEFAULT_WIDTH: 320,
-	  CANVAS_DEFAULT_HEIGHT: 480
-	};
-
-	module.exports = CANVAS_CONST;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
 	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 
 	var draw = function draw(context) {
 
@@ -371,15 +322,20 @@
 	  };
 	};
 
-	module.exports = draw;
+	//module.exports = draw;
+	exports['default'] = draw;
+	module.exports = exports['default'];
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 	// 用户的得分情况
 	"use strict";
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var score = {
 	  tabs: 0,
 	  hit: 0,
@@ -387,12 +343,46 @@
 	  accuracy: 0
 	};
 
-	module.exports = score;
+	//module.exports = score;
+	exports["default"] = score;
+	module.exports = exports["default"];
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var util = {
+	  // 检查有没有产生碰撞
+	  collide: function collide(a, b) {
+	    // 勾股定理
+	    var distance_squared = (a.x + a.radius / 2 - b.x) * (a.x + a.radius / 2 - b.x) + (a.y + a.radius / 2 - b.y) * (a.y + a.radius / 2 - b.y);
+	    var radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
+
+	    if (distance_squared < radii_squared) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  }
+	};
+
+	//module.exports = util;
+	exports["default"] = util;
+	module.exports = exports["default"];
 
 /***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from '../coin_canvas_es6/common/const.js';
+	//var COIN_CONST = require('../common/const.js');
+	//var draw = require('../common/draw');
+	//var score = require('../common/score');
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -401,10 +391,129 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var COIN_CONST = __webpack_require__(2);
-	var draw = __webpack_require__(3);
+	var _commonConstJs = __webpack_require__(6);
+
+	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
+
+	var _commonDraw = __webpack_require__(2);
+
+	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+
+	var _commonScore = __webpack_require__(3);
+
+	var _commonScore2 = _interopRequireDefault(_commonScore);
+
+	var coinImage = new Image();
+	coinImage.src = './img/ele.png';
+
+	// 生成金币
+
+	var RMB = (function () {
+	  function RMB() {
+	    _classCallCheck(this, RMB);
+
+	    this.type = 'rmb';
+	    // 半径大小
+	    this.radius = Math.random() * 20 + 10;
+	    // 下降的速度
+	    this.speed = Math.random() * 3 + 1;
+	    // 水平方向的位置
+	    this.x = Math.random() * COIN_CONST.CANVAS_DEFAULT_WIDTH - this.radius * 2;
+	    if (this.x < this.radius) {
+	      this.x = this.radius;
+	    }
+	    this.y = 0;
+	    this.remove = false;
+	  }
+
+	  _createClass(RMB, [{
+	    key: 'updateElement',
+	    value: function updateElement() {
+	      this.y += this.speed;
+	      if (this.y > COIN_CONST.CANVAS_DEFAULT_HEIGHT + 10) {
+	        _commonScore2['default'].escaped += 1;
+	        this.remove = true;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      (0, _commonDraw2['default'])(canvasContext).image(coinImage, this.x, this.y, this.radius * 2, this.radius * 2);
+	    }
+	  }]);
+
+	  return RMB;
+	})();
+
+	exports['default'] = RMB;
+	module.exports = exports['default'];
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	// canvas的实际宽度和高度
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var CANVAS_DEFAULT_WIDTH = 320;
+	exports.CANVAS_DEFAULT_WIDTH = CANVAS_DEFAULT_WIDTH;
+	var CANVAS_DEFAULT_HEIGHT = 480;
+
+	exports.CANVAS_DEFAULT_HEIGHT = CANVAS_DEFAULT_HEIGHT;
+	//export function a() {
+	//
+	//}
+
+	//const CANVAS_DEFAULT_WIDTH = 320;
+	//const CANVAS_DEFAULT_HEIGHT = 480;
+	//
+	//module.exports = CANVAS_DEFAULT_WIDTH;
+	//module.exports = CANVAS_DEFAULT_HEIGHT;
+
+	// canvas的实际宽度和高度
+	//var CANVAS_CONST = {
+	//  CANVAS_DEFAULT_WIDTH: 320,
+	//  CANVAS_DEFAULT_HEIGHT: 480
+	//};
+	//
+	//module.exports = CANVAS_CONST;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//var COIN_CONST = require('../common/const.js');
+	//var draw = require('../common/draw');
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _commonConstJs = __webpack_require__(6);
+
+	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
+
+	var _commonDraw = __webpack_require__(2);
+
+	var _commonDraw2 = _interopRequireDefault(_commonDraw);
 
 	// 云朵
 
@@ -431,7 +540,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      draw(canvasContext).cloud(this.x, this.y, this.width, this.height);
+	      (0, _commonDraw2['default'])(canvasContext).cloud(this.x, this.y, this.width, this.height);
 	    }
 	  }]);
 
@@ -442,9 +551,11 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//var COIN_CONST = require('../common/const.js');
+	//var draw = require('../common/draw');
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -453,10 +564,19 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var COIN_CONST = __webpack_require__(2);
-	var draw = __webpack_require__(3);
+	var _commonConstJs = __webpack_require__(6);
+
+	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
+
+	var _commonDraw = __webpack_require__(2);
+
+	var _commonDraw2 = _interopRequireDefault(_commonDraw);
 
 	// 点击后的碎片效果
 
@@ -495,7 +615,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      draw(canvasContext).circle(this.x, this.y, this.radius, this.color);
+	      (0, _commonDraw2['default'])(canvasContext).circle(this.x, this.y, this.radius, this.color);
 	    }
 	  }]);
 
@@ -506,9 +626,10 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//var draw = require('../common/draw');
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -517,9 +638,13 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var draw = __webpack_require__(3);
+	var _commonDraw = __webpack_require__(2);
+
+	var _commonDraw2 = _interopRequireDefault(_commonDraw);
 
 	// 点击后显示一个点击的效果
 
@@ -544,7 +669,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      draw(canvasContext).circle(this.x, this.y, this.radius, 'rgba(255,0,0,' + this.opacity + ')');
+	      (0, _commonDraw2['default'])(canvasContext).circle(this.x, this.y, this.radius, 'rgba(255,0,0,' + this.opacity + ')');
 	    }
 	  }]);
 
@@ -553,48 +678,6 @@
 
 	exports['default'] = Touch;
 	module.exports = exports['default'];
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var requestAnimFrame = (function () {
-	  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
-	    window.setTimeout(callback, 1000 / 60);
-	  };
-	})();
-
-	module.exports = requestAnimFrame;
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var util = {
-	  // 检查有没有产生碰撞
-	  collide: function collide(a, b) {
-	    console.log('a::', a);
-	    console.log('b::', b);
-	    var distance_squared = (a.x + a.radius / 2 - b.x) * (a.x + a.radius / 2 - b.x) + (a.y + a.radius / 2 - b.y) * (a.y + a.radius / 2 - b.y);
-
-	    var radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
-
-	    console.log('distance_squared::', distance_squared);
-	    console.log('radii_squared::', radii_squared);
-
-	    if (distance_squared < radii_squared) {
-	      return true;
-	    } else {
-	      return false;
-	    }
-	  }
-	};
-
-	module.exports = util;
 
 /***/ }
 /******/ ]);

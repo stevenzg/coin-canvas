@@ -1,12 +1,15 @@
 //module COIN_CONST from '../coin_canvas_es6/common/const.js';
-//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from '../coin_canvas_es6/common/const.js';
-
-var COIN_CONST = require('./common/const');
-var requestAnimFrameFunction = require('./common/timer');
-var draw = require('./common/draw');
-var score = require('./common/score');
-var util = require('./common/util');
-
+//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from './common/const.js';
+//var COIN_CONST = require('./common/const');
+//var requestAnimFrameFunction = require('./common/timer');
+//var draw = require('./common/draw');
+//var score = require('./common/score');
+//var util = require('./common/util');
+import * as COIN_CONST from './common/const.js';
+import requestAnimFrameFunction from './common/timer';
+import draw from './common/draw';
+import score from './common/score';
+import util from './common/util';
 import RMB from './elements/rmb';
 import Cloud from './elements/cloud';
 import Particle from './elements/particle';

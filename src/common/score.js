@@ -6,4 +6,5 @@ var score = {
   accuracy: 0
 };
 
-module.exports = score;
+//module.exports = score;
+export default score;

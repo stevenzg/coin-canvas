@@ -1,3 +1,4 @@
+
 var draw = function(context) {
 
   return {
@@ -83,4 +84,5 @@ var draw = function(context) {
   }
 };
 
-module.exports = draw;
+//module.exports = draw;
+export default draw;

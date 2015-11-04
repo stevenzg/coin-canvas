@@ -1,4 +1,5 @@
-var draw = require('../common/draw');
+//var draw = require('../common/draw');
+import draw from '../common/draw';
 
 // 点击后显示一个点击的效果
 class Touch {

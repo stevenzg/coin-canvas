@@ -9,4 +9,5 @@ var requestAnimFrame = (function () {
     };
 })()
 
-module.exports = requestAnimFrame;
+//module.exports = requestAnimFrame;
+export default requestAnimFrame;
