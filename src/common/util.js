@@ -5,6 +5,9 @@ var util = {
 
     var radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
 
+    console.log('distance_squared::', distance_squared);
+    console.log('radii_squared::', radii_squared);
+
     if (distance_squared < radii_squared) {
       return true;
     } else {

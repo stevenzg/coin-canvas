@@ -130,15 +130,15 @@
 	      Coin.Event.add(e.touches[0]);
 	    }, false);
 
-	    window.addEventListener('touchmove', function (e) {
-	      console.log('touchmove');
-	      e.preventDefault();
-	    }, false);
-
-	    window.addEventListener('touchend', function (e) {
-	      console.log('touchend');
-	      e.preventDefault();
-	    }, false);
+	    //window.addEventListener('touchmove', (e) => {
+	    //  console.log('touchmove');
+	    //  e.preventDefault();
+	    //}, false);
+	    //
+	    //window.addEventListener('touchend', (e) => {
+	    //  console.log('touchend');
+	    //  e.preventDefault();
+	    //}, false);
 
 	    Coin.resizeCanvas();
 	    Coin.falling();
@@ -181,6 +181,7 @@
 	      Coin.elements[i].updateElement();
 
 	      if (Coin.elements[i].type === 'rmb' && isCollision) {
+	        console.log('isCollision::', isCollision);
 	        var hit = util.collide(Coin.elements[i], { x: Coin.Event.x, y: Coin.Event.y, radius: 7 });
 	        // 当击中后，显示一些碎片
 	        if (hit) {
@@ -207,7 +208,7 @@
 	    for (var i = 0, len = Coin.elements.length; i < len; ++i) {
 	      Coin.elements[i].render();
 	    }
-	    draw(canvasContext).text('红包: ' + score.hit / 10 + ' 元', 20, 30, 14, '#fff');
+	    draw(canvasContext).text('饿币: ' + score.hit / 10 + ' 元', 20, 30, 14, '#fff');
 	    draw(canvasContext).text('丢失: ' + score.escaped / 10 + ' 元', 20, 50, 14, '#fff');
 	  },
 
@@ -585,7 +586,7 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	var util = {
 	  // 检查有没有产生碰撞
@@ -593,6 +594,9 @@
 	    var distance_squared = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 
 	    var radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
+
+	    console.log('distance_squared::', distance_squared);
+	    console.log('radii_squared::', radii_squared);
 
 	    if (distance_squared < radii_squared) {
 	      return true;
