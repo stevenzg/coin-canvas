@@ -119,26 +119,14 @@
 	    document.body.appendChild(Coin.canvas);
 
 	    window.addEventListener('click', function (e) {
-	      console.log('click');
 	      e.preventDefault();
 	      Coin.Event.add(e);
 	    }, false);
 
 	    window.addEventListener('touchstart', function (e) {
-	      console.log('touchstart');
 	      e.preventDefault();
 	      Coin.Event.add(e.touches[0]);
 	    }, false);
-
-	    //window.addEventListener('touchmove', (e) => {
-	    //  console.log('touchmove');
-	    //  e.preventDefault();
-	    //}, false);
-	    //
-	    //window.addEventListener('touchend', (e) => {
-	    //  console.log('touchend');
-	    //  e.preventDefault();
-	    //}, false);
 
 	    Coin.resizeCanvas();
 	    Coin.falling();
@@ -181,8 +169,7 @@
 	      Coin.elements[i].updateElement();
 
 	      if (Coin.elements[i].type === 'rmb' && isCollision) {
-	        console.log('isCollision::', isCollision);
-	        var hit = util.collide(Coin.elements[i], { x: Coin.Event.x, y: Coin.Event.y, radius: 7 });
+	        var hit = util.collide(Coin.elements[i], { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
 	        // 当击中后，显示一些碎片
 	        if (hit) {
 	          for (var n = 0; n < 5; ++n) {
@@ -227,7 +214,6 @@
 	  add: function add(event) {
 	    // MouseEvent.pageX
 	    Coin.Event.x = (event.pageX - Coin.offset.left) / Coin.scale;
-
 	    // MouseEvent.pageY
 	    Coin.Event.y = (event.pageY - Coin.offset.top) / Coin.scale;
 	    Coin.Event.tabbed = true;
@@ -591,7 +577,9 @@
 	var util = {
 	  // 检查有没有产生碰撞
 	  collide: function collide(a, b) {
-	    var distance_squared = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+	    console.log('a::', a);
+	    console.log('b::', b);
+	    var distance_squared = (a.x + a.radius / 2 - b.x) * (a.x + a.radius / 2 - b.x) + (a.y + a.radius / 2 - b.y) * (a.y + a.radius / 2 - b.y);
 
 	    var radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
 
