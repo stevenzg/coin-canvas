@@ -483,11 +483,11 @@
 	  // 检查有没有产生碰撞
 	  collide: function collide(a, b) {
 	    // 勾股定理
-	    //let distanceSquared = ( ((a.x + a.radius/2 - b.x) * (a.x + a.radius/2 - b.x)) + ((a.y + a.radius/2  - b.y) * (a.y + a.radius/2  - b.y)));
-	    //let radiiSquared = (a.radius + b.radius) * (a.radius + b.radius);
+	    var distanceSquared = (a.x + a.radius / 2 - b.x) * (a.x + a.radius / 2 - b.x) + (a.y + a.radius / 2 - b.y) * (a.y + a.radius / 2 - b.y);
+	    var radiiSquared = (a.radius + b.radius) * (a.radius + b.radius);
 
-	    var distanceSquared = Math.hypot(a.x + a.radius / 2 - b.x, a.y + a.radius / 2 - b.y);
-	    var radiiSquared = a.radius + b.radius;
+	    //let distanceSquared = Math.hypot(a.x + a.radius/2 - b.x, a.y + a.radius/2  - b.y);
+	    //let radiiSquared = a.radius + b.radius;
 
 	    return distanceSquared < radiiSquared;
 	  }
