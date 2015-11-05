@@ -109,6 +109,7 @@ http://jsperf.com/setinterval-vs-settimeout
 [How To Design A Mobile Game With HTML5](http://www.smashingmagazine.com/2012/10/design-your-own-mobile-game/)
 [2D breakout game using pure JavaScript](https://developer.mozilla.org/en-US/docs/Games/Workflows/2D_Breakout_game_pure_JavaScript)
 http://www.lostdecadegames.com/demos/simple_canvas_game/
+https://github.com/mozilla/mortar-game-stub
 [A Gentle Introduction to Making HTML5 Canvas Interactive](http://simonsarris.com/blog/510-making-html5-canvas-useful)
 [Making and Moving Selectable Shapes on an HTML5 Canvas: A Simple Example](http://simonsarris.com/blog/140-canvas-moving-selectable-shapes)
 [Selectable Shapes Part 2: Resizable, Movable Shapes on HTML5 Canvas](http://simonsarris.com/blog/225-canvas-selecting-resizing-shape)
@@ -136,12 +137,16 @@ http://stackoverflow.com/questions/13157586/full-screen-canvas-on-mobile-devices
 https://geeksretreat.wordpress.com/2012/10/24/great-balls-of-gravity-html5-canvas/
 http://codetheory.in/rendering-animations-with-moving-objects-on-canvas/
 http://codetheory.in/basics-of-implementing-gravity-with-html5-canvas/
+http://javascript-html5-tutorial.com/html5-tutorial-a-photo-on-the-canvas-with-clickable-elements.html
+http://pterkildsen.com/2013/06/28/create-a-html5-canvas-element-with-clickable-elements/
+http://stackoverflow.com/questions/15391949/canvas-addeventlistener-click-image
 
 # 关键字
 canvas  mobile game
 canvas animation
 canvas click on moving
 canvas click moving image
+canvas click image
 canvas falling ball
 html5 canvas tree
 html5 canvas 树

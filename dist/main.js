@@ -156,8 +156,9 @@
 	  },
 
 	  repaintCanvas: function repaintCanvas() {
-	    var i = undefined,
-	        isCollision = false;
+	    //let i,
+	    var isCollision = undefined;
+	    isCollision = false;
 
 	    Coin.tick -= 1;
 
@@ -174,23 +175,66 @@
 	      isCollision = true;
 	    }
 
-	    for (i = 0; i < Coin.elements.length; ++i) {
-	      Coin.elements[i].updateElement();
+	    var _iteratorNormalCompletion = true;
+	    var _didIteratorError = false;
+	    var _iteratorError = undefined;
 
-	      if (Coin.elements[i].type === 'rmb' && isCollision) {
-	        var hit = _commonUtil2['default'].collide(Coin.elements[i], { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
-	        // 当击中后，显示一些碎片
-	        if (hit) {
-	          for (var n = 0; n < 5; ++n) {
-	            Coin.elements.push(new _elementsParticle2['default'](Coin.elements[i].x, Coin.elements[i].y));
+	    try {
+	      for (var _iterator = Coin.elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	        var element = _step.value;
+
+	        element.updateElement();
+
+	        if (element.type === 'rmb' && isCollision) {
+	          var hit = _commonUtil2['default'].collide(element, { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
+	          // 当击中后，显示一些碎片
+	          if (hit) {
+	            for (var n = 0; n < 5; ++n) {
+	              Coin.elements.push(new _elementsParticle2['default'](element.x, element.y));
+	            }
+	            _commonScore2['default'].hit += 1;
 	          }
-	          _commonScore2['default'].hit += 1;
+	          element.remove = hit;
 	        }
-	        Coin.elements[i].remove = hit;
+
+	        if (element.remove) {
+	          var i = Coin.elements.indexOf(element);
+	          Coin.elements.splice(i, 1);
+	        }
 	      }
 
-	      if (Coin.elements[i].remove) {
-	        Coin.elements.splice(i, 1);
+	      //for (i = 0; i < Coin.elements.length; ++i) {
+	      //  var actualElement = Coin.elements[i];
+	      //  actualElement.updateElement();
+	      //
+	      //  if (actualElement.type === 'rmb' && isCollision) {
+	      //    let hit = util.collide(actualElement, {x: Coin.Event.x, y: Coin.Event.y, radius: 5});
+	      //    // 当击中后，显示一些碎片
+	      //    if (hit) {
+	      //      for (let n = 0; n < 5; ++n) {
+	      //        Coin.elements.push(new Particle(actualElement.x, actualElement.y));
+	      //      }
+	      //      score.hit += 1;
+	      //    }
+	      //    actualElement.remove = hit;
+	      //  }
+	      //
+	      //  if (actualElement.remove) {
+	      //    Coin.elements.splice(i, 1);
+	      //  }
+	      //}
+	    } catch (err) {
+	      _didIteratorError = true;
+	      _iteratorError = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion && _iterator['return']) {
+	          _iterator['return']();
+	        }
+	      } finally {
+	        if (_didIteratorError) {
+	          throw _iteratorError;
+	        }
 	      }
 	    }
 	  },
@@ -202,9 +246,34 @@
 	    // 草地
 	    _canvasDraw2['default'].image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
 
-	    for (var i = 0, len = Coin.elements.length; i < len; ++i) {
-	      Coin.elements[i].render();
+	    //for (let i = 0, len = Coin.elements.length; i < len; ++i) {
+	    //  Coin.elements[i].render();
+	    //}
+	    var _iteratorNormalCompletion2 = true;
+	    var _didIteratorError2 = false;
+	    var _iteratorError2 = undefined;
+
+	    try {
+	      for (var _iterator2 = Coin.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	        var element = _step2.value;
+
+	        element.render();
+	      }
+	    } catch (err) {
+	      _didIteratorError2 = true;
+	      _iteratorError2 = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+	          _iterator2['return']();
+	        }
+	      } finally {
+	        if (_didIteratorError2) {
+	          throw _iteratorError2;
+	        }
+	      }
 	    }
+
 	    _canvasDraw2['default'].text('饿币: ' + _commonScore2['default'].hit / 10 + ' 元', 20, 30, 14, '#fff');
 	    _canvasDraw2['default'].text('丢失: ' + _commonScore2['default'].escaped / 10 + ' 元', 20, 50, 14, '#fff');
 	  },
@@ -414,51 +483,15 @@
 	  // 检查有没有产生碰撞
 	  collide: function collide(a, b) {
 	    // 勾股定理
-	    var distance_squared = (a.x + a.radius / 2 - b.x) * (a.x + a.radius / 2 - b.x) + (a.y + a.radius / 2 - b.y) * (a.y + a.radius / 2 - b.y);
-	    var radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
+	    //let distanceSquared = ( ((a.x + a.radius/2 - b.x) * (a.x + a.radius/2 - b.x)) + ((a.y + a.radius/2  - b.y) * (a.y + a.radius/2  - b.y)));
+	    //let radiiSquared = (a.radius + b.radius) * (a.radius + b.radius);
 
-	    if (distance_squared < radii_squared) {
-	      return true;
-	    } else {
-	      return false;
-	    }
+	    var distanceSquared = Math.hypot(a.x + a.radius / 2 - b.x, a.y + a.radius / 2 - b.y);
+	    var radiiSquared = a.radius + b.radius;
+
+	    return distanceSquared < radiiSquared;
 	  }
 	};
-
-	//var util = ~ function() {
-	//var util = void function() {
-	//  return {
-	//    // 检查有没有产生碰撞
-	//    collide: (a, b) => {
-	//      // 勾股定理
-	//      let distance_squared = ( ((a.x + a.radius/2 - b.x) * (a.x + a.radius/2 - b.x)) + ((a.y + a.radius/2  - b.y) * (a.y + a.radius/2  - b.y)));
-	//      let radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
-	//
-	//      if (distance_squared < radii_squared) {
-	//        return true;
-	//      } else {
-	//        return false;
-	//      }
-	//    }
-	//  };
-	//}();
-
-	//var util = (function() {
-	//  return {
-	//    // 检查有没有产生碰撞
-	//    collide: (a, b) => {
-	//      // 勾股定理
-	//      let distance_squared = ( ((a.x + a.radius/2 - b.x) * (a.x + a.radius/2 - b.x)) + ((a.y + a.radius/2  - b.y) * (a.y + a.radius/2  - b.y)));
-	//      let radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
-	//
-	//      if (distance_squared < radii_squared) {
-	//        return true;
-	//      } else {
-	//        return false;
-	//      }
-	//    }
-	//  };
-	//})();
 
 	exports["default"] = util;
 	module.exports = exports["default"];
