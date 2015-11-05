@@ -2,7 +2,7 @@ Play: [Coin Canvas](http://gyf1.com/coin-canvas/)
 
 # 为什么要搞点游戏
 游戏可以让烧钱更有趣。
-就快到双11，不知道有没有人在淘宝抢红包，我听说现在都是以游戏的形式出现的，不像现在饿了么是直接抢红包。
+就快到双11，不知道有没有人在淘宝抢红包，好像现在都是以游戏的形式出现的。
 而且做点游戏也便于推广和增加用户黏度。当然有人就直接想获取一个红包。但是可以混合使用普通模式和游戏模式。
 
 # Canvas overview
@@ -14,9 +14,12 @@ Play: [Coin Canvas](http://gyf1.com/coin-canvas/)
 # 实现思路
 ### 定时器
 为什么我们选择requestAnimationFrame
+
 http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+
 [CSS3动画那么强，requestAnimationFrame还有毛线用？](http://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-动画算法/)
-相当一部分的浏览器的显示频率是16.7ms, 如果显示器16.7ms刷新间隔之前发生了其他绘制请求，就会出现丢帧，会有点卡。
+
+> 相当一部分的浏览器的显示频率是16.7ms, 如果显示器16.7ms刷新间隔之前发生了其他绘制请求，就会出现丢帧，会有点卡。
 不仅如此，这种计时器频率的降低也会对电池使用寿命造成负面影响，并会降低其他应用的性能。
 这也是为何setTimeout的定时器值推荐最小使用16.7ms的原因（16.7 = 1000 / 60, 即每秒60帧）。
 而我requestAnimationFrame就是为了这个而出现的。我所做的事情很简单，跟着浏览器的绘制走，如果浏览设备绘制间隔是16.7ms，那我就这个间隔绘制；
@@ -26,8 +29,9 @@ http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 而setInterval和setTimeout也是有区别的：
 The difference is subtle:
 
-setInterval code executes every 1000ms exactly, while...
+> setInterval code executes every 1000ms exactly, while...
 setTimeout waits 1000ms, runs the function (which takes few ms), then sets another timeout. So the wait period is actually a bit more than 1000ms.
+
 http://stackoverflow.com/questions/729921/settimeout-or-setinterval
 
 settimeout setinterval performance:
@@ -40,10 +44,10 @@ http://jsperf.com/setinterval-vs-settimeout
 
 
 
-### To Do
+# To Do
 总结出一个开发模版 canvas game template
 
-### More
+# More
 [How To Design A Mobile Game With HTML5](http://www.smashingmagazine.com/2012/10/design-your-own-mobile-game/)
 [2D breakout game using pure JavaScript](https://developer.mozilla.org/en-US/docs/Games/Workflows/2D_Breakout_game_pure_JavaScript)
 http://www.lostdecadegames.com/demos/simple_canvas_game/
@@ -75,7 +79,7 @@ https://geeksretreat.wordpress.com/2012/10/24/great-balls-of-gravity-html5-canva
 http://codetheory.in/rendering-animations-with-moving-objects-on-canvas/
 http://codetheory.in/basics-of-implementing-gravity-with-html5-canvas/
 
-### 关键字
+# 关键字
 canvas  mobile game
 canvas animation
 canvas click on moving

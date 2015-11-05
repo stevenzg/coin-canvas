@@ -3,7 +3,7 @@
 //var draw = require('../common/draw');
 //var score = require('../common/score');
 import * as COIN_CONST from '../common/const.js';
-import draw from '../common/draw';
+import draw from '../canvas/draw';
 import score from '../common/score';
 
 
@@ -36,7 +36,7 @@ class RMB {
   }
 
   render() {
-    draw(canvasContext).image(coinImage, this.x, this.y, this.radius * 2, this.radius * 2);
+    draw.image(coinImage, this.x, this.y, this.radius * 2, this.radius * 2);
   }
 }
 

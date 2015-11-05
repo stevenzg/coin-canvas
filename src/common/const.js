@@ -2,10 +2,6 @@
 export const CANVAS_DEFAULT_WIDTH = 320;
 export const CANVAS_DEFAULT_HEIGHT = 480;
 
-//export function a() {
-//
-//}
-
 //const CANVAS_DEFAULT_WIDTH = 320;
 //const CANVAS_DEFAULT_HEIGHT = 480;
 //

@@ -1,7 +1,7 @@
 //var COIN_CONST = require('../common/const.js');
 //var draw = require('../common/draw');
 import * as COIN_CONST from '../common/const.js';
-import draw from '../common/draw';
+import draw from '../canvas/draw';
 
 // 点击后的碎片效果
 class Particle {
@@ -34,7 +34,7 @@ class Particle {
   }
 
   render () {
-    draw(canvasContext).circle(this.x, this.y, this.radius, this.color);
+    draw.circle(this.x, this.y, this.radius, this.color);
   }
 }
 

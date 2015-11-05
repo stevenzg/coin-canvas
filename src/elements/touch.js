@@ -1,5 +1,5 @@
 //var draw = require('../common/draw');
-import draw from '../common/draw';
+import draw from '../canvas/draw';
 
 // 点击后显示一个点击的效果
 class Touch {
@@ -18,7 +18,7 @@ class Touch {
   }
 
   render() {
-    draw(canvasContext).circle(this.x, this.y, this.radius, 'rgba(255,0,0,' + this.opacity + ')');
+    draw.circle(this.x, this.y, this.radius, 'rgba(255,0,0,' + this.opacity + ')');
   }
 }
 

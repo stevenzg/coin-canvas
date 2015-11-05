@@ -44,52 +44,49 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//module COIN_CONST from '../coin_canvas_es6/common/const.js';
-	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from './common/const.js';
-	//var COIN_CONST = require('./common/const');
-	//var requestAnimFrameFunction = require('./common/timer');
-	//var draw = require('./common/draw');
-	//var score = require('./common/score');
-	//var util = require('./common/util');
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _commonConstJs = __webpack_require__(6);
+	var _commonConstJs = __webpack_require__(1);
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _commonTimer = __webpack_require__(1);
+	var _canvasCanvasJs = __webpack_require__(2);
+
+	var Canvas = _interopRequireWildcard(_canvasCanvasJs);
+
+	var _commonTimer = __webpack_require__(3);
 
 	var _commonTimer2 = _interopRequireDefault(_commonTimer);
 
-	var _commonDraw = __webpack_require__(2);
+	var _canvasDraw = __webpack_require__(11);
 
-	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
-	var _commonScore = __webpack_require__(3);
+	var _commonScore = __webpack_require__(5);
 
 	var _commonScore2 = _interopRequireDefault(_commonScore);
 
-	var _commonUtil = __webpack_require__(4);
+	var _commonUtil = __webpack_require__(6);
 
 	var _commonUtil2 = _interopRequireDefault(_commonUtil);
 
-	var _elementsRmb = __webpack_require__(5);
+	var _elementsRmb = __webpack_require__(7);
 
 	var _elementsRmb2 = _interopRequireDefault(_elementsRmb);
 
-	var _elementsCloud = __webpack_require__(7);
+	var _elementsCloud = __webpack_require__(8);
 
 	var _elementsCloud2 = _interopRequireDefault(_elementsCloud);
 
-	var _elementsParticle = __webpack_require__(8);
+	var _elementsParticle = __webpack_require__(9);
 
 	var _elementsParticle2 = _interopRequireDefault(_elementsParticle);
 
-	var _elementsTouch = __webpack_require__(9);
+	var _elementsTouch = __webpack_require__(10);
 
 	var _elementsTouch2 = _interopRequireDefault(_elementsTouch);
 
@@ -97,7 +94,6 @@
 	grassImage.src = './img/grass.png';
 
 	var Coin = {
-
 	  // 根据屏幕的大小resize后的缩放比例
 	  scale: 1,
 
@@ -123,20 +119,13 @@
 	  // canvas对象
 	  canvas: null,
 
-	  // canvas context
-	  context: null,
-
 	  init: function init() {
 	    Coin.RATIO = COIN_CONST.CANVAS_DEFAULT_WIDTH / COIN_CONST.CANVAS_DEFAULT_HEIGHT;
 
 	    Coin.currentWidth = COIN_CONST.CANVAS_DEFAULT_WIDTH;
 	    Coin.currentHeight = COIN_CONST.CANVAS_DEFAULT_HEIGHT;
 
-	    Coin.canvas = document.createElement("canvas");
-	    window.canvasContext = Coin.canvas.getContext('2d');
-	    Coin.canvas.width = COIN_CONST.CANVAS_DEFAULT_WIDTH;
-	    Coin.canvas.height = COIN_CONST.CANVAS_DEFAULT_HEIGHT;
-	    document.body.appendChild(Coin.canvas);
+	    Coin.canvas = Canvas.canvasObj;
 
 	    window.addEventListener('click', function (e) {
 	      e.preventDefault();
@@ -167,7 +156,7 @@
 	  },
 
 	  repaintCanvas: function repaintCanvas() {
-	    var i,
+	    var i = undefined,
 	        isCollision = false;
 
 	    Coin.tick -= 1;
@@ -208,15 +197,15 @@
 
 	  render: function render() {
 	    // 整个canvas的颜色
-	    (0, _commonDraw2['default'])(canvasContext).rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
+	    _canvasDraw2['default'].rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
 	    // 草地
-	    (0, _commonDraw2['default'])(canvasContext).image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
+	    _canvasDraw2['default'].image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
 
 	    for (var i = 0, len = Coin.elements.length; i < len; ++i) {
 	      Coin.elements[i].render();
 	    }
-	    (0, _commonDraw2['default'])(canvasContext).text('饿币: ' + _commonScore2['default'].hit / 10 + ' 元', 20, 30, 14, '#fff');
-	    (0, _commonDraw2['default'])(canvasContext).text('丢失: ' + _commonScore2['default'].escaped / 10 + ' 元', 20, 50, 14, '#fff');
+	    _canvasDraw2['default'].text('饿币: ' + _commonScore2['default'].hit / 10 + ' 元', 20, 30, 14, '#fff');
+	    _canvasDraw2['default'].text('丢失: ' + _commonScore2['default'].escaped / 10 + ' 元', 20, 50, 14, '#fff');
 	  },
 
 	  falling: function falling() {
@@ -243,28 +232,46 @@
 	window.addEventListener('load', Coin.init, false);
 	window.addEventListener('resize', Coin.resizeCanvas, false);
 
+	//module COIN_CONST from '../coin_canvas_es6/common/const.js';
+	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from './common/const.js';
+	//var COIN_CONST = require('./common/const');
+	//var requestAnimFrameFunction = require('./common/timer');
+	//var draw = require('./common/draw');
+	//var score = require('./common/score');
+	//var util = require('./common/util');
+
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
 
+	// canvas的实际宽度和高度
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var requestAnimFrame = (function () {
-	  return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
-	    window.setTimeout(callback, 1000 / 60);
-	  };
-	})();
+	var CANVAS_DEFAULT_WIDTH = 320;
+	exports.CANVAS_DEFAULT_WIDTH = CANVAS_DEFAULT_WIDTH;
+	var CANVAS_DEFAULT_HEIGHT = 480;
 
-	//module.exports = requestAnimFrame;
-	exports["default"] = requestAnimFrame;
-	module.exports = exports["default"];
+	exports.CANVAS_DEFAULT_HEIGHT = CANVAS_DEFAULT_HEIGHT;
+	//const CANVAS_DEFAULT_WIDTH = 320;
+	//const CANVAS_DEFAULT_HEIGHT = 480;
+	//
+	//module.exports = CANVAS_DEFAULT_WIDTH;
+	//module.exports = CANVAS_DEFAULT_HEIGHT;
+
+	// canvas的实际宽度和高度
+	//var CANVAS_CONST = {
+	//  CANVAS_DEFAULT_WIDTH: 320,
+	//  CANVAS_DEFAULT_HEIGHT: 480
+	//};
+	//
+	//module.exports = CANVAS_CONST;
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -272,62 +279,42 @@
 	  value: true
 	});
 
-	var draw = function draw(context) {
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	  return {
-	    clear: function clear() {
-	      context.clearRect(0, 0, Coin.WIDTH, Coin.HEIGHT);
-	    },
+	var _commonConst = __webpack_require__(1);
 
-	    rect: function rect(x, y, w, h, color) {
-	      context.fillStyle = color;
-	      context.fillRect(x, y, w, h);
-	    },
+	var COIN_CONST = _interopRequireWildcard(_commonConst);
 
-	    circle: function circle(x, y, r, color) {
-	      context.fillStyle = color;
-	      context.beginPath();
-	      context.arc(x, y + 5, r, 0, Math.PI * 2, true);
-	      context.closePath();
-	      context.fill();
-	    },
+	var canvasObj = document.createElement("canvas");
+	var canvasContext = canvasObj.getContext('2d');
 
-	    text: function text(string, x, y, size, color) {
-	      context.font = 'bold ' + size + 'px Monospace';
-	      context.fillStyle = color;
-	      context.fillText(string, x, y);
-	    },
+	canvasObj.width = COIN_CONST.CANVAS_DEFAULT_WIDTH;
+	canvasObj.height = COIN_CONST.CANVAS_DEFAULT_HEIGHT;
 
-	    image: function image(img, dx, dy, width, height) {
-	      context.drawImage(img, dx, dy, width, height);
-	    },
+	document.body.appendChild(canvasObj);
 
-	    cloud: function cloud(cx, cy, cw, ch) {
-	      context.beginPath();
-	      //创建渐变
-	      var grd = context.createLinearGradient(0, 0, 0, cy);
-	      grd.addColorStop(0, 'rgba(255,255,255,0.8)');
-	      grd.addColorStop(1, 'rgba(255,255,255,0.5)');
-	      context.fillStyle = grd;
-	      context.fill();
-	      //在不同位置创建5个圆拼接成云朵现状
-	      context.arc(cx, cy, cw * 0.19, 0, 360, false);
-	      context.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
-	      context.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
-	      context.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
-	      context.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
-	      context.closePath();
-	      context.fill();
-	    }
-	  };
-	};
-
-	//module.exports = draw;
-	exports['default'] = draw;
-	module.exports = exports['default'];
+	exports.canvasObj = canvasObj;
+	exports.canvasContext = canvasContext;
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var requestAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+	  window.setTimeout(callback, 1000 / 60);
+	};
+
+	exports["default"] = requestAnimFrame;
+	module.exports = exports["default"];
+
+/***/ },
+/* 4 */,
+/* 5 */
 /***/ function(module, exports) {
 
 	// 用户的得分情况
@@ -343,12 +330,11 @@
 	  accuracy: 0
 	};
 
-	//module.exports = score;
 	exports["default"] = score;
 	module.exports = exports["default"];
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -371,12 +357,11 @@
 	  }
 	};
 
-	//module.exports = util;
 	exports["default"] = util;
 	module.exports = exports["default"];
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from '../coin_canvas_es6/common/const.js';
@@ -397,15 +382,15 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _commonConstJs = __webpack_require__(6);
+	var _commonConstJs = __webpack_require__(1);
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _commonDraw = __webpack_require__(2);
+	var _canvasDraw = __webpack_require__(11);
 
-	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
-	var _commonScore = __webpack_require__(3);
+	var _commonScore = __webpack_require__(5);
 
 	var _commonScore2 = _interopRequireDefault(_commonScore);
 
@@ -444,7 +429,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      (0, _commonDraw2['default'])(canvasContext).image(coinImage, this.x, this.y, this.radius * 2, this.radius * 2);
+	      _canvasDraw2['default'].image(coinImage, this.x, this.y, this.radius * 2, this.radius * 2);
 	    }
 	  }]);
 
@@ -455,40 +440,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	// canvas的实际宽度和高度
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var CANVAS_DEFAULT_WIDTH = 320;
-	exports.CANVAS_DEFAULT_WIDTH = CANVAS_DEFAULT_WIDTH;
-	var CANVAS_DEFAULT_HEIGHT = 480;
-
-	exports.CANVAS_DEFAULT_HEIGHT = CANVAS_DEFAULT_HEIGHT;
-	//export function a() {
-	//
-	//}
-
-	//const CANVAS_DEFAULT_WIDTH = 320;
-	//const CANVAS_DEFAULT_HEIGHT = 480;
-	//
-	//module.exports = CANVAS_DEFAULT_WIDTH;
-	//module.exports = CANVAS_DEFAULT_HEIGHT;
-
-	// canvas的实际宽度和高度
-	//var CANVAS_CONST = {
-	//  CANVAS_DEFAULT_WIDTH: 320,
-	//  CANVAS_DEFAULT_HEIGHT: 480
-	//};
-	//
-	//module.exports = CANVAS_CONST;
-
-/***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//var COIN_CONST = require('../common/const.js');
@@ -507,13 +459,13 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _commonConstJs = __webpack_require__(6);
+	var _commonConstJs = __webpack_require__(1);
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _commonDraw = __webpack_require__(2);
+	var _canvasDraw = __webpack_require__(11);
 
-	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
 	// 云朵
 
@@ -540,7 +492,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      (0, _commonDraw2['default'])(canvasContext).cloud(this.x, this.y, this.width, this.height);
+	      _canvasDraw2['default'].cloud(this.x, this.y, this.width, this.height);
 	    }
 	  }]);
 
@@ -551,7 +503,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//var COIN_CONST = require('../common/const.js');
@@ -570,13 +522,13 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _commonConstJs = __webpack_require__(6);
+	var _commonConstJs = __webpack_require__(1);
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _commonDraw = __webpack_require__(2);
+	var _canvasDraw = __webpack_require__(11);
 
-	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
 	// 点击后的碎片效果
 
@@ -615,7 +567,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      (0, _commonDraw2['default'])(canvasContext).circle(this.x, this.y, this.radius, this.color);
+	      _canvasDraw2['default'].circle(this.x, this.y, this.radius, this.color);
 	    }
 	  }]);
 
@@ -626,7 +578,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//var draw = require('../common/draw');
@@ -642,9 +594,9 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _commonDraw = __webpack_require__(2);
+	var _canvasDraw = __webpack_require__(11);
 
-	var _commonDraw2 = _interopRequireDefault(_commonDraw);
+	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
 	// 点击后显示一个点击的效果
 
@@ -669,7 +621,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      (0, _commonDraw2['default'])(canvasContext).circle(this.x, this.y, this.radius, 'rgba(255,0,0,' + this.opacity + ')');
+	      _canvasDraw2['default'].circle(this.x, this.y, this.radius, 'rgba(255,0,0,' + this.opacity + ')');
 	    }
 	  }]);
 
@@ -677,6 +629,68 @@
 	})();
 
 	exports['default'] = Touch;
+	module.exports = exports['default'];
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _canvas = __webpack_require__(2);
+
+	var draw = {
+	  clear: function clear() {
+	    _canvas.canvasContext.clearRect(0, 0, Coin.WIDTH, Coin.HEIGHT);
+	  },
+
+	  rect: function rect(x, y, w, h, color) {
+	    _canvas.canvasContext.fillStyle = color;
+	    _canvas.canvasContext.fillRect(x, y, w, h);
+	  },
+
+	  circle: function circle(x, y, r, color) {
+	    _canvas.canvasContext.fillStyle = color;
+	    _canvas.canvasContext.beginPath();
+	    _canvas.canvasContext.arc(x, y + 5, r, 0, Math.PI * 2, true);
+	    _canvas.canvasContext.closePath();
+	    _canvas.canvasContext.fill();
+	  },
+
+	  text: function text(string, x, y, size, color) {
+	    _canvas.canvasContext.font = 'bold ' + size + 'px Monospace';
+	    _canvas.canvasContext.fillStyle = color;
+	    _canvas.canvasContext.fillText(string, x, y);
+	  },
+
+	  image: function image(img, dx, dy, width, height) {
+	    _canvas.canvasContext.drawImage(img, dx, dy, width, height);
+	  },
+
+	  cloud: function cloud(cx, cy, cw, ch) {
+	    _canvas.canvasContext.beginPath();
+	    //创建渐变
+	    var grd = _canvas.canvasContext.createLinearGradient(0, 0, 0, cy);
+	    grd.addColorStop(0, 'rgba(255,255,255,0.8)');
+	    grd.addColorStop(1, 'rgba(255,255,255,0.5)');
+	    _canvas.canvasContext.fillStyle = grd;
+	    _canvas.canvasContext.fill();
+	    //在不同位置创建5个圆拼接成云朵现状
+	    _canvas.canvasContext.arc(cx, cy, cw * 0.19, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
+	    _canvas.canvasContext.closePath();
+	    _canvas.canvasContext.fill();
+	  }
+	};
+
+	exports['default'] = draw;
 	module.exports = exports['default'];
 
 /***/ }

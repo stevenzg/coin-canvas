@@ -1,7 +1,7 @@
 //var COIN_CONST = require('../common/const.js');
 //var draw = require('../common/draw');
 import * as COIN_CONST from '../common/const.js';
-import draw from '../common/draw';
+import draw from '../canvas/draw';
 
 // 云朵
 class Cloud {
@@ -22,7 +22,7 @@ class Cloud {
   }
 
   render () {
-    draw(canvasContext).cloud(this.x, this.y, this.width, this.height);
+    draw.cloud(this.x, this.y, this.width, this.height);
   }
 }
 

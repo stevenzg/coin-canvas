@@ -1,13 +1,7 @@
-//module COIN_CONST from '../coin_canvas_es6/common/const.js';
-//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from './common/const.js';
-//var COIN_CONST = require('./common/const');
-//var requestAnimFrameFunction = require('./common/timer');
-//var draw = require('./common/draw');
-//var score = require('./common/score');
-//var util = require('./common/util');
 import * as COIN_CONST from './common/const.js';
+import * as Canvas from './canvas/canvas.js';
 import requestAnimFrameFunction from './common/timer';
-import draw from './common/draw';
+import draw from './canvas/draw';
 import score from './common/score';
 import util from './common/util';
 import RMB from './elements/rmb';
@@ -19,7 +13,6 @@ var grassImage = new Image();
 grassImage.src = './img/grass.png';
 
 var Coin = {
-
   // 根据屏幕的大小resize后的缩放比例
   scale: 1,
 
@@ -45,20 +38,13 @@ var Coin = {
   // canvas对象
   canvas: null,
 
-  // canvas context
-  context: null,
-
   init: () => {
     Coin.RATIO = COIN_CONST.CANVAS_DEFAULT_WIDTH / COIN_CONST.CANVAS_DEFAULT_HEIGHT;
 
     Coin.currentWidth = COIN_CONST.CANVAS_DEFAULT_WIDTH;
     Coin.currentHeight = COIN_CONST.CANVAS_DEFAULT_HEIGHT;
 
-    Coin.canvas = document.createElement("canvas");
-    window.canvasContext = Coin.canvas.getContext('2d');
-    Coin.canvas.width = COIN_CONST.CANVAS_DEFAULT_WIDTH;
-    Coin.canvas.height = COIN_CONST.CANVAS_DEFAULT_HEIGHT;
-    document.body.appendChild(Coin.canvas);
+    Coin.canvas = Canvas.canvasObj;
 
     window.addEventListener('click', (e) => {
       e.preventDefault();
@@ -89,7 +75,7 @@ var Coin = {
   },
 
   repaintCanvas: () => {
-    var i, isCollision = false;
+    let i, isCollision = false;
 
     Coin.tick -= 1;
 
@@ -110,10 +96,10 @@ var Coin = {
       Coin.elements[i].updateElement();
 
       if (Coin.elements[i].type === 'rmb' && isCollision) {
-        var hit = util.collide(Coin.elements[i], {x: Coin.Event.x, y: Coin.Event.y, radius: 5});
+        let hit = util.collide(Coin.elements[i], {x: Coin.Event.x, y: Coin.Event.y, radius: 5});
         // 当击中后，显示一些碎片
         if (hit) {
-          for (var n = 0; n < 5; ++n) {
+          for (let n = 0; n < 5; ++n) {
             Coin.elements.push(new Particle(Coin.elements[i].x, Coin.elements[i].y));
           }
           score.hit += 1;
@@ -129,18 +115,18 @@ var Coin = {
 
   render: () => {
     // 整个canvas的颜色
-    draw(canvasContext).rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
+    draw.rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
     // 草地
-    draw(canvasContext).image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT-50, Coin.currentWidth, 50);
+    draw.image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT-50, Coin.currentWidth, 50);
 
-    for (var i = 0, len = Coin.elements.length; i < len; ++i) {
+    for (let i = 0, len = Coin.elements.length; i < len; ++i) {
       Coin.elements[i].render();
     }
-    draw(canvasContext).text('饿币: ' + score.hit / 10 + ' 元', 20, 30, 14, '#fff');
-    draw(canvasContext).text('丢失: ' + score.escaped / 10 + ' 元', 20, 50, 14, '#fff');
+    draw.text('饿币: ' + score.hit / 10 + ' 元', 20, 30, 14, '#fff');
+    draw.text('丢失: ' + score.escaped / 10 + ' 元', 20, 50, 14, '#fff');
   },
 
-  falling: function() {
+  falling: () => {
     requestAnimFrameFunction(Coin.falling);
     Coin.repaintCanvas();
     Coin.render();
@@ -163,3 +149,12 @@ Coin.Event = {
 
 window.addEventListener('load', Coin.init, false);
 window.addEventListener('resize', Coin.resizeCanvas, false);
+
+
+//module COIN_CONST from '../coin_canvas_es6/common/const.js';
+//import {CANVAS_DEFAULT_WIDTH, CANVAS_DEFAULT_HEIGHT} from './common/const.js';
+//var COIN_CONST = require('./common/const');
+//var requestAnimFrameFunction = require('./common/timer');
+//var draw = require('./common/draw');
+//var score = require('./common/score');
+//var util = require('./common/util');
