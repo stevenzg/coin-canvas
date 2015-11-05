@@ -175,66 +175,45 @@
 	      isCollision = true;
 	    }
 
-	    var _iteratorNormalCompletion = true;
-	    var _didIteratorError = false;
-	    var _iteratorError = undefined;
+	    //for (let element of Coin.elements) {
+	    //  element.updateElement();
+	    //
+	    //  if (element.type === 'rmb' && isCollision) {
+	    //    let hit = util.collide(element, {x: Coin.Event.x, y: Coin.Event.y, radius: 5});
+	    //    // 当击中后，显示一些碎片
+	    //    if (hit) {
+	    //      for (let n = 0; n < 5; ++n) {
+	    //        Coin.elements.push(new Particle(element.x, element.y));
+	    //      }
+	    //      score.hit += 1;
+	    //    }
+	    //    element.remove = hit;
+	    //  }
+	    //
+	    //  if (element.remove) {
+	    //    let i = Coin.elements.indexOf(element);
+	    //    Coin.elements.splice(i, 1);
+	    //  }
+	    //}
 
-	    try {
-	      for (var _iterator = Coin.elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	        var element = _step.value;
+	    for (var i = 0; i < Coin.elements.length; ++i) {
+	      var actualElement = Coin.elements[i];
+	      actualElement.updateElement();
 
-	        element.updateElement();
-
-	        if (element.type === 'rmb' && isCollision) {
-	          var hit = _commonUtil2['default'].collide(element, { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
-	          // 当击中后，显示一些碎片
-	          if (hit) {
-	            for (var n = 0; n < 5; ++n) {
-	              Coin.elements.push(new _elementsParticle2['default'](element.x, element.y));
-	            }
-	            _commonScore2['default'].hit += 1;
+	      if (actualElement.type === 'rmb' && isCollision) {
+	        var hit = _commonUtil2['default'].collide(actualElement, { x: Coin.Event.x, y: Coin.Event.y, radius: 5 });
+	        // 当击中后，显示一些碎片
+	        if (hit) {
+	          for (var n = 0; n < 5; ++n) {
+	            Coin.elements.push(new _elementsParticle2['default'](actualElement.x, actualElement.y));
 	          }
-	          element.remove = hit;
+	          _commonScore2['default'].hit += 1;
 	        }
-
-	        if (element.remove) {
-	          var i = Coin.elements.indexOf(element);
-	          Coin.elements.splice(i, 1);
-	        }
+	        actualElement.remove = hit;
 	      }
 
-	      //for (i = 0; i < Coin.elements.length; ++i) {
-	      //  var actualElement = Coin.elements[i];
-	      //  actualElement.updateElement();
-	      //
-	      //  if (actualElement.type === 'rmb' && isCollision) {
-	      //    let hit = util.collide(actualElement, {x: Coin.Event.x, y: Coin.Event.y, radius: 5});
-	      //    // 当击中后，显示一些碎片
-	      //    if (hit) {
-	      //      for (let n = 0; n < 5; ++n) {
-	      //        Coin.elements.push(new Particle(actualElement.x, actualElement.y));
-	      //      }
-	      //      score.hit += 1;
-	      //    }
-	      //    actualElement.remove = hit;
-	      //  }
-	      //
-	      //  if (actualElement.remove) {
-	      //    Coin.elements.splice(i, 1);
-	      //  }
-	      //}
-	    } catch (err) {
-	      _didIteratorError = true;
-	      _iteratorError = err;
-	    } finally {
-	      try {
-	        if (!_iteratorNormalCompletion && _iterator['return']) {
-	          _iterator['return']();
-	        }
-	      } finally {
-	        if (_didIteratorError) {
-	          throw _iteratorError;
-	        }
+	      if (actualElement.remove) {
+	        Coin.elements.splice(i, 1);
 	      }
 	    }
 	  },
@@ -246,34 +225,12 @@
 	    // 草地
 	    _canvasDraw2['default'].image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
 
-	    //for (let i = 0, len = Coin.elements.length; i < len; ++i) {
-	    //  Coin.elements[i].render();
-	    //}
-	    var _iteratorNormalCompletion2 = true;
-	    var _didIteratorError2 = false;
-	    var _iteratorError2 = undefined;
-
-	    try {
-	      for (var _iterator2 = Coin.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-	        var element = _step2.value;
-
-	        element.render();
-	      }
-	    } catch (err) {
-	      _didIteratorError2 = true;
-	      _iteratorError2 = err;
-	    } finally {
-	      try {
-	        if (!_iteratorNormalCompletion2 && _iterator2['return']) {
-	          _iterator2['return']();
-	        }
-	      } finally {
-	        if (_didIteratorError2) {
-	          throw _iteratorError2;
-	        }
-	      }
+	    for (var i = 0, len = Coin.elements.length; i < len; ++i) {
+	      Coin.elements[i].render();
 	    }
-
+	    //for (let element of Coin.elements) {
+	    //  element.render();
+	    //}
 	    _canvasDraw2['default'].text('饿币: ' + _commonScore2['default'].hit / 10 + ' 元', 20, 30, 14, '#fff');
 	    _canvasDraw2['default'].text('丢失: ' + _commonScore2['default'].escaped / 10 + ' 元', 20, 50, 14, '#fff');
 	  },
