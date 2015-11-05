@@ -33,7 +33,7 @@ class RMB {
   updateElement() {
     this.y += this.speed;
     if (this.y > COIN_CONST.CANVAS_DEFAULT_HEIGHT + 10) {
-      score.escaped += 1;
+      score.escaped += this.money;
       this.remove = true;
     }
   }

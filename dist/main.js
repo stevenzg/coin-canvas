@@ -518,7 +518,7 @@
 	    value: function updateElement() {
 	      this.y += this.speed;
 	      if (this.y > COIN_CONST.CANVAS_DEFAULT_HEIGHT + 10) {
-	        _commonScore2['default'].escaped += 1;
+	        _commonScore2['default'].escaped += this.money;
 	        this.remove = true;
 	      }
 	    }
