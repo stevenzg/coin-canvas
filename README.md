@@ -7,9 +7,67 @@ Play: [Coin Canvas](http://gyf1.com/coin-canvas/)
 
 # Canvas overview
 ### 即时模式
+> 画布工作在即时模式，它并不保存自己的对象，只是说明在每个单个帧里绘制什么。
+
+Canvas做的事情就是画图，而且画完了就忘了。
+我们不能通过DOM访问到canvas创建的单个图形元素。
+
+> Canvas是一个即时模式的绘图界面，这就意味着如果什么东西发生了变化就需要即时重新绘制
+
+Canvas也没有对动画的处理，如果要有动画的效果，比如移动一个元素，那我们就需要清除整个的canvas，然后重新画一下移动过的元素。
+
 ### 加载
+> window对象是DOM的最高一级，需要对这个对象进行检测来确保开始使用Canvas应用程序之前，已经加载了所有的资源和代码
+
+代码：
+```javascript
+window.addEventListener('load', eventWindowLoaded, false);
+```
+
 ### 浏览器支持
-### context
+不是每个浏览器都会支持canvas，对不支持的浏览器该如何处理
+* 在canvas的标签里输入提示文字，不支持的浏览器会显示
+```html
+<canvas>您的浏览器不支持canvas</canvas>
+```
+* 在写js代码的时候进行检测
+```javascript
+var theCanvas = document.getElementById('canvasOne');
+if (!theCanvas || !theCanvas.getContext) {
+  return;
+}
+```
+* 创建一个虚拟画布
+```javascript
+function canvasSupport () {
+  return !!document.createElement('canvas').getContext;
+}
+function canvasApp () {
+  if (!canvasSupport) {
+    return;
+  }
+}
+```
+* modernizr.js
+```javascript
+function canvasSupport () {
+  return Modernizr.canvas;
+}
+```
+### context 环境
+> 在Canvas上运行的各种操作都要通过context对象，因为它引用了HTML页面上的对象
+
+```javascript
+var context = theCanvas.getContext('2d');
+```
+对应的JavaScript标准对象叫做：CanvasRenderingContext2D（简称 环境）
+上面定义了很多方法(一个屏幕的截图都截不全，还有一些...
+![canvas](https://cloud.githubusercontent.com/assets/6308804/10778529/1c7c2ec2-7d62-11e5-820f-3a49c986d9e9.jpg)
+
+
+
+
+
 
 # 实现思路
 ### 定时器
