@@ -207,7 +207,7 @@
 	          for (var n = 0; n < 5; ++n) {
 	            Coin.elements.push(new _elementsParticle2['default'](actualElement.x, actualElement.y));
 	          }
-	          _commonScore2['default'].hit += 1;
+	          _commonScore2['default'].hit += actualElement.money;
 	        }
 	        actualElement.remove = hit;
 	      }
@@ -231,8 +231,8 @@
 	    //for (let element of Coin.elements) {
 	    //  element.render();
 	    //}
-	    _canvasDraw2['default'].text('饿币: ' + _commonScore2['default'].hit / 10 + ' 元', 20, 30, 14, '#fff');
-	    _canvasDraw2['default'].text('丢失: ' + _commonScore2['default'].escaped / 10 + ' 元', 20, 50, 14, '#fff');
+	    _canvasDraw2['default'].text('饿币: ' + _commonScore2['default'].hit + ' 元', 20, 30, 14, '#fff');
+	    _canvasDraw2['default'].text('丢失: ' + _commonScore2['default'].escaped + ' 元', 20, 50, 14, '#fff');
 	  },
 
 	  falling: function falling() {
@@ -499,8 +499,11 @@
 	    this.type = 'rmb';
 	    // 半径大小
 	    this.radius = Math.random() * 20 + 10;
+	    this.money = this.radius < 20 ? 3 : 1;
 	    // 下降的速度
 	    this.speed = Math.random() * 3 + 1;
+	    if (this.speed > 3) this.money += 2;
+
 	    // 水平方向的位置
 	    this.x = Math.random() * COIN_CONST.CANVAS_DEFAULT_WIDTH - this.radius * 2;
 	    if (this.x < this.radius) {

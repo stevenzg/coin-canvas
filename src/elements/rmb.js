@@ -16,8 +16,11 @@ class RMB {
     this.type = 'rmb';
     // 半径大小
     this.radius = (Math.random() * 20) + 10;
+    this.money = this.radius < 20 ? 3 : 1;
     // 下降的速度
     this.speed = (Math.random() * 3) + 1;
+    if (this.speed > 3) this.money += 2;
+
     // 水平方向的位置
     this.x = (Math.random() * (COIN_CONST.CANVAS_DEFAULT_WIDTH) - this.radius * 2);
     if (this.x < this.radius) {

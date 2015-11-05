@@ -126,7 +126,7 @@ var Coin = {
           for (let n = 0; n < 5; ++n) {
             Coin.elements.push(new Particle(actualElement.x, actualElement.y));
           }
-          score.hit += 1;
+          score.hit += actualElement.money;
         }
         actualElement.remove = hit;
       }
@@ -150,8 +150,8 @@ var Coin = {
     //for (let element of Coin.elements) {
     //  element.render();
     //}
-    draw.text('饿币: ' + score.hit / 10 + ' 元', 20, 30, 14, '#fff');
-    draw.text('丢失: ' + score.escaped / 10 + ' 元', 20, 50, 14, '#fff');
+    draw.text('饿币: ' + score.hit + ' 元', 20, 30, 14, '#fff');
+    draw.text('丢失: ' + score.escaped + ' 元', 20, 50, 14, '#fff');
   },
 
   falling: () => {
