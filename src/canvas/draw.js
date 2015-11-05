@@ -1,8 +1,9 @@
 import {canvasContext as context} from './canvas';
+import * as COIN_CONST from '../common/const';
 
 var draw = {
   clear: () => {
-    context.clearRect(0, 0, Coin.WIDTH, Coin.HEIGHT);
+    context.clearRect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT);
   },
 
   rect: (x, y, w, h, color) => {

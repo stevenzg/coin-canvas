@@ -5,7 +5,7 @@ import draw from '../canvas/draw';
 
 // 点击后的碎片效果
 class Particle {
-  constructor (x, y) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.radius = 2;
@@ -33,7 +33,7 @@ class Particle {
     }
   }
 
-  render () {
+  render() {
     draw.circle(this.x, this.y, this.radius, this.color);
   }
 }

@@ -3,7 +3,7 @@ import draw from '../canvas/draw';
 
 // 点击后显示一个点击的效果
 class Touch {
-  constructor (x, y) {
+  constructor(x, y) {
     this.type = 'touch';
     this.x = x;
     this.y = y;
@@ -14,7 +14,7 @@ class Touch {
 
   updateElement() {
     this.opacity -= this.fade;
-    this.remove = (this.opacity < 0) ? true : false;
+    this.remove = (this.opacity < 0);
   }
 
   render() {

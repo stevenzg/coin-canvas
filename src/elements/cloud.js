@@ -3,9 +3,9 @@
 import * as COIN_CONST from '../common/const.js';
 import draw from '../canvas/draw';
 
-// 云朵
+// 浮云
 class Cloud {
-  constructor () {
+  constructor() {
     this.x = 0;
     this.y = Math.random() * 50;
     this.y = this.y < 30 ? 30 : this.y;
@@ -14,14 +14,14 @@ class Cloud {
     this.remove = false;
   }
 
-  updateElement () {
+  updateElement() {
     this.x += 0.5;
     if (this.x > COIN_CONST.CANVAS_DEFAULT_WIDTH + 10) {
       this.remove = true;
     }
   }
 
-  render () {
+  render() {
     draw.cloud(this.x, this.y, this.width, this.height);
   }
 }

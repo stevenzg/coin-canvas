@@ -62,7 +62,7 @@
 
 	var _commonTimer2 = _interopRequireDefault(_commonTimer);
 
-	var _canvasDraw = __webpack_require__(11);
+	var _canvasDraw = __webpack_require__(4);
 
 	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
@@ -196,6 +196,7 @@
 	  },
 
 	  render: function render() {
+	    _canvasDraw2['default'].clear();
 	    // 整个canvas的颜色
 	    _canvasDraw2['default'].rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
 	    // 草地
@@ -285,7 +286,7 @@
 
 	var COIN_CONST = _interopRequireWildcard(_commonConst);
 
-	var canvasObj = document.createElement("canvas");
+	var canvasObj = document.createElement('canvas');
 	var canvasContext = canvasObj.getContext('2d');
 
 	canvasObj.width = COIN_CONST.CANVAS_DEFAULT_WIDTH;
@@ -313,7 +314,74 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 4 */,
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+	var _canvas = __webpack_require__(2);
+
+	var _commonConst = __webpack_require__(1);
+
+	var COIN_CONST = _interopRequireWildcard(_commonConst);
+
+	var draw = {
+	  clear: function clear() {
+	    _canvas.canvasContext.clearRect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT);
+	  },
+
+	  rect: function rect(x, y, w, h, color) {
+	    _canvas.canvasContext.fillStyle = color;
+	    _canvas.canvasContext.fillRect(x, y, w, h);
+	  },
+
+	  circle: function circle(x, y, r, color) {
+	    _canvas.canvasContext.fillStyle = color;
+	    _canvas.canvasContext.beginPath();
+	    _canvas.canvasContext.arc(x, y + 5, r, 0, Math.PI * 2, true);
+	    _canvas.canvasContext.closePath();
+	    _canvas.canvasContext.fill();
+	  },
+
+	  text: function text(string, x, y, size, color) {
+	    _canvas.canvasContext.font = 'bold ' + size + 'px Monospace';
+	    _canvas.canvasContext.fillStyle = color;
+	    _canvas.canvasContext.fillText(string, x, y);
+	  },
+
+	  image: function image(img, dx, dy, width, height) {
+	    _canvas.canvasContext.drawImage(img, dx, dy, width, height);
+	  },
+
+	  cloud: function cloud(cx, cy, cw, ch) {
+	    _canvas.canvasContext.beginPath();
+	    //创建渐变
+	    var grd = _canvas.canvasContext.createLinearGradient(0, 0, 0, cy);
+	    grd.addColorStop(0, 'rgba(255,255,255,0.8)');
+	    grd.addColorStop(1, 'rgba(255,255,255,0.5)');
+	    _canvas.canvasContext.fillStyle = grd;
+	    _canvas.canvasContext.fill();
+	    //在不同位置创建5个圆拼接成云朵现状
+	    _canvas.canvasContext.arc(cx, cy, cw * 0.19, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
+	    _canvas.canvasContext.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
+	    _canvas.canvasContext.closePath();
+	    _canvas.canvasContext.fill();
+	  }
+	};
+
+	exports['default'] = draw;
+	module.exports = exports['default'];
+
+/***/ },
 /* 5 */
 /***/ function(module, exports) {
 
@@ -357,6 +425,41 @@
 	  }
 	};
 
+	//var util = ~ function() {
+	//var util = void function() {
+	//  return {
+	//    // 检查有没有产生碰撞
+	//    collide: (a, b) => {
+	//      // 勾股定理
+	//      let distance_squared = ( ((a.x + a.radius/2 - b.x) * (a.x + a.radius/2 - b.x)) + ((a.y + a.radius/2  - b.y) * (a.y + a.radius/2  - b.y)));
+	//      let radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
+	//
+	//      if (distance_squared < radii_squared) {
+	//        return true;
+	//      } else {
+	//        return false;
+	//      }
+	//    }
+	//  };
+	//}();
+
+	//var util = (function() {
+	//  return {
+	//    // 检查有没有产生碰撞
+	//    collide: (a, b) => {
+	//      // 勾股定理
+	//      let distance_squared = ( ((a.x + a.radius/2 - b.x) * (a.x + a.radius/2 - b.x)) + ((a.y + a.radius/2  - b.y) * (a.y + a.radius/2  - b.y)));
+	//      let radii_squared = (a.radius + b.radius) * (a.radius + b.radius);
+	//
+	//      if (distance_squared < radii_squared) {
+	//        return true;
+	//      } else {
+	//        return false;
+	//      }
+	//    }
+	//  };
+	//})();
+
 	exports["default"] = util;
 	module.exports = exports["default"];
 
@@ -386,7 +489,7 @@
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _canvasDraw = __webpack_require__(11);
+	var _canvasDraw = __webpack_require__(4);
 
 	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
@@ -463,11 +566,11 @@
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _canvasDraw = __webpack_require__(11);
+	var _canvasDraw = __webpack_require__(4);
 
 	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
-	// 云朵
+	// 浮云
 
 	var Cloud = (function () {
 	  function Cloud() {
@@ -526,7 +629,7 @@
 
 	var COIN_CONST = _interopRequireWildcard(_commonConstJs);
 
-	var _canvasDraw = __webpack_require__(11);
+	var _canvasDraw = __webpack_require__(4);
 
 	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
@@ -594,7 +697,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _canvasDraw = __webpack_require__(11);
+	var _canvasDraw = __webpack_require__(4);
 
 	var _canvasDraw2 = _interopRequireDefault(_canvasDraw);
 
@@ -616,7 +719,7 @@
 	    key: 'updateElement',
 	    value: function updateElement() {
 	      this.opacity -= this.fade;
-	      this.remove = this.opacity < 0 ? true : false;
+	      this.remove = this.opacity < 0;
 	    }
 	  }, {
 	    key: 'render',
@@ -629,68 +732,6 @@
 	})();
 
 	exports['default'] = Touch;
-	module.exports = exports['default'];
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	var _canvas = __webpack_require__(2);
-
-	var draw = {
-	  clear: function clear() {
-	    _canvas.canvasContext.clearRect(0, 0, Coin.WIDTH, Coin.HEIGHT);
-	  },
-
-	  rect: function rect(x, y, w, h, color) {
-	    _canvas.canvasContext.fillStyle = color;
-	    _canvas.canvasContext.fillRect(x, y, w, h);
-	  },
-
-	  circle: function circle(x, y, r, color) {
-	    _canvas.canvasContext.fillStyle = color;
-	    _canvas.canvasContext.beginPath();
-	    _canvas.canvasContext.arc(x, y + 5, r, 0, Math.PI * 2, true);
-	    _canvas.canvasContext.closePath();
-	    _canvas.canvasContext.fill();
-	  },
-
-	  text: function text(string, x, y, size, color) {
-	    _canvas.canvasContext.font = 'bold ' + size + 'px Monospace';
-	    _canvas.canvasContext.fillStyle = color;
-	    _canvas.canvasContext.fillText(string, x, y);
-	  },
-
-	  image: function image(img, dx, dy, width, height) {
-	    _canvas.canvasContext.drawImage(img, dx, dy, width, height);
-	  },
-
-	  cloud: function cloud(cx, cy, cw, ch) {
-	    _canvas.canvasContext.beginPath();
-	    //创建渐变
-	    var grd = _canvas.canvasContext.createLinearGradient(0, 0, 0, cy);
-	    grd.addColorStop(0, 'rgba(255,255,255,0.8)');
-	    grd.addColorStop(1, 'rgba(255,255,255,0.5)');
-	    _canvas.canvasContext.fillStyle = grd;
-	    _canvas.canvasContext.fill();
-	    //在不同位置创建5个圆拼接成云朵现状
-	    _canvas.canvasContext.arc(cx, cy, cw * 0.19, 0, 360, false);
-	    _canvas.canvasContext.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
-	    _canvas.canvasContext.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
-	    _canvas.canvasContext.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
-	    _canvas.canvasContext.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
-	    _canvas.canvasContext.closePath();
-	    _canvas.canvasContext.fill();
-	  }
-	};
-
-	exports['default'] = draw;
 	module.exports = exports['default'];
 
 /***/ }

@@ -114,10 +114,11 @@ var Coin = {
   },
 
   render: () => {
+    draw.clear();
     // 整个canvas的颜色
     draw.rect(0, 0, COIN_CONST.CANVAS_DEFAULT_WIDTH, COIN_CONST.CANVAS_DEFAULT_HEIGHT, '#1e89e0');
     // 草地
-    draw.image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT-50, Coin.currentWidth, 50);
+    draw.image(grassImage, 0, COIN_CONST.CANVAS_DEFAULT_HEIGHT - 50, Coin.currentWidth, 50);
 
     for (let i = 0, len = Coin.elements.length; i < len; ++i) {
       Coin.elements[i].render();

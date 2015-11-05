@@ -3,7 +3,7 @@ var requestAnimFrame = window.requestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   window.oRequestAnimationFrame ||
   window.msRequestAnimationFrame ||
-  function (callback) {
+  function(callback) {
     window.setTimeout(callback, 1000 / 60);
   };
 

@@ -12,7 +12,7 @@ coinImage.src = './img/ele.png';
 
 // 生成金币
 class RMB {
-  constructor () {
+  constructor() {
     this.type = 'rmb';
     // 半径大小
     this.radius = (Math.random() * 20) + 10;

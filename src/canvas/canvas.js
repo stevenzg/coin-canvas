@@ -1,6 +1,6 @@
 import * as COIN_CONST from '../common/const';
 
-var canvasObj = document.createElement("canvas");
+var canvasObj = document.createElement('canvas');
 var canvasContext = canvasObj.getContext('2d');
 
 canvasObj.width = COIN_CONST.CANVAS_DEFAULT_WIDTH;
